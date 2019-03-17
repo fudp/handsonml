@@ -60,12 +60,19 @@ class CombinedAttributesAdder(BaseEstimator, TransformerMixin):
         rooms_per_household = X[:, rooms_ix] / X[:, household_ix]
         population_per_household = X[:, population_ix] / X[:, household_ix]
         rooms_per_population = X[:, rooms_ix] / X[:, population_ix]
-        bedrooms_per_population = X[:, bedrooms_ix] / X[: population_ix]
         if self.add_bedrooms_per_room:
             bedrooms_per_room = X[:, bedrooms_ix] / X[:, rooms_ix]
-            return np.c_[X, rooms_per_household, bedrooms_per_room,
-                         population_per_household, rooms_per_population,
-                         bedrooms_per_population]
+            return np.c_[X, rooms_per_household, population_per_household,
+                         bedrooms_per_room, rooms_per_population]
         else:
             return np.c_[X, rooms_per_household, population_per_household,
-                         rooms_per_population, bedrooms_per_population]
+                         rooms_per_population]
+
+
+def display_scores(scores):
+    """Print the CV scores and some summary statistics."""
+    # print('scores:', scores)
+    print('Mean:  ', scores.mean())
+    print('StdDev:', scores.std())
+
+
