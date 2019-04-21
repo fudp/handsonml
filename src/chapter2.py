@@ -30,7 +30,7 @@ def load_housing_data(housing_path):
 def split_train_test(data, test_ratio, random_state=42):
     """Basic train-test splitter."""
     n_samples = len(data)
-    shuffled_indices = np.random.permutatiln(n_samples)
+    shuffled_indices = np.random.permutation(n_samples)
     test_size = int(test_ratio * n_samples)
     idx_test = shuffled_indices[:test_size]
     idx_train = shuffled_indices[test_size:]
